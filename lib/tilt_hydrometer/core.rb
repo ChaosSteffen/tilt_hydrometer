@@ -12,6 +12,10 @@ module TiltHydrometer
           beacon.extend(TiltHydrometer::BeaconDecorator)
           beacon.log
 
+          if beacon.values_out_of_range?
+            LOGGER.debug('values out of range') && next
+          end
+
           brewfather&.post(beacon)
         end
       end

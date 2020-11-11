@@ -16,6 +16,10 @@ module TiltHydrometer
       "#{gravity_string[-4] || 0}.#{gravity_string[-3..-1]}"
     end
 
+    def values_out_of_range?
+      temp.to_i > 212
+    end
+
     def log
       LOGGER.debug("Beacon: #{inspect}")
       LOGGER.debug("Data: #{data.inspect}")
