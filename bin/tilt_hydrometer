@@ -7,10 +7,16 @@ require 'optparse/uri'
 require 'bundler/setup'
 require 'tilt_hydrometer'
 
-options = { interval: 15 * 60 }
+options = {
+  interval: 15 * 60,
+  mqtt_prefix: ''
+}
+
 OptionParser.new do |parser|
-  parser.on('-b', '--brewfather URL', URI, 'Brewfather Custom Stram URL')
+  parser.on('-b', '--brewfather URL', URI, 'Brewfather Custom Stream URL')
   parser.on('-i', '--interval SECONDS', Integer, 'Logging interval')
+  parser.on('-m', '--mqtt URI', URI, 'URI to MQTT broker')
+  parser.on('-p', '--mqtt_prefix STRING', String, ' MQTT topic prefix')
 end.parse!(into: options)
 
 TiltHydrometer::Core.new(options).run

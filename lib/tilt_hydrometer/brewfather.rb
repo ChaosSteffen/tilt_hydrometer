@@ -20,9 +20,9 @@ module TiltHydrometer
     def beacon_json(beacon)
       {
         name: "Tilt-#{beacon.color}",
-        temp: beacon.temp,
+        temp: beacon.temp.to_s,
         temp_unit: 'F',
-        gravity: beacon.gravity,
+        gravity: beacon.gravity.to_s,
         gravity_unit: 'G'
       }.to_json
     end

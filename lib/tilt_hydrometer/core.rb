@@ -17,18 +17,12 @@ module TiltHydrometer
           end
 
           brewfather&.post(beacon)
+          mqtt&.publish(beacon)
         end
       end
     end
 
     private
-
-    def brewfather
-      return unless @options[:brewfather] && @options[:interval]
-
-      @brewfather ||=
-        TiltHydrometer::Brewfather.new(@options[:brewfather], @options[:interval])
-    end
 
     def scanner
       @scanner ||=
@@ -39,6 +33,20 @@ module TiltHydrometer
             )
           )
         end
+    end
+
+    def brewfather
+      return unless @options[:brewfather] && @options[:interval]
+
+      @brewfather ||=
+        TiltHydrometer::Brewfather.new(@options[:brewfather], @options[:interval])
+    end
+
+    def mqtt
+      return unless @options[:mqtt] && @options[:mqtt_prefix]
+
+      @mqtt ||=
+        TiltHydrometer::MQTT.new(@options[:mqtt], @options[:mqtt_prefix])
     end
   end
 end

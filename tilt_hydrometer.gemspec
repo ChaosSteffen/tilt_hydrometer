@@ -15,6 +15,7 @@ Gem::Specification.new do |s|
     'https://github.com/ChaosSteffen/tilt_hydrometer'
   s.license     = 'BSD-2-Clause'
   s.add_runtime_dependency 'faraday', '1.1.0'
+  s.add_runtime_dependency 'mqtt', '0.5.0'
   s.add_runtime_dependency 'scan_beacon', '0.7.11'
   s.required_ruby_version = Gem::Requirement.new('>= 2.5.5')
 end
