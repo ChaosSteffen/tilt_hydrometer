@@ -1,0 +1,46 @@
+PATH
+  remote: .
+  specs:
+    tilt_hydrometer (0.0.0)
+      faraday (= 1.1.0)
+      scan_beacon (= 0.7.11)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    ast (2.4.1)
+    faraday (1.1.0)
+      multipart-post (>= 1.2, < 3)
+      ruby2_keywords
+    multipart-post (2.1.1)
+    parallel (1.20.0)
+    parser (2.7.2.0)
+      ast (~> 2.4.1)
+    rainbow (3.0.0)
+    regexp_parser (1.8.2)
+    rexml (3.2.4)
+    rubocop (1.2.0)
+      parallel (~> 1.10)
+      parser (>= 2.7.1.5)
+      rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 1.8)
+      rexml
+      rubocop-ast (>= 1.0.1)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 1.4.0, < 2.0)
+    rubocop-ast (1.1.1)
+      parser (>= 2.7.1.5)
+    ruby-progressbar (1.10.1)
+    ruby2_keywords (0.0.2)
+    scan_beacon (0.7.11)
+    unicode-display_width (1.7.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  rubocop
+  tilt_hydrometer!
+
+BUNDLED WITH
+   2.1.4

@@ -1,5 +1,16 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
+require 'optparse'
+require 'optparse/uri'
+
+require 'bundler/setup'
 require 'tilt_hydrometer'
 
-TiltHydrometer.new(ARGV[0]).run
+options = { interval: 15 * 60 }
+OptionParser.new do |parser|
+  parser.on('-b', '--brewfather URL', URI, 'Brewfather Custom Stram URL')
+  parser.on('-i', '--interval SECONDS', Integer, 'Logging interval')
+end.parse!(into: options)
+
+TiltHydrometer::Core.new(options).run
