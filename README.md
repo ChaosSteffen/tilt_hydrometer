@@ -1,5 +1,5 @@
 # Tilt Hydrometer
-This software is a replacement for TiltPi and posts your Tilt readings straight to [Brewfather](https://brewfather.app/) and/or to a [MQTT](https://en.wikipedia.org/wiki/MQTT) broker.
+This software is a replacement for [TiltPi](https://github.com/baronbrew/TILTpi) and posts your Tilt readings straight to [Brewfather](https://brewfather.app/) and/or to a [MQTT](https://en.wikipedia.org/wiki/MQTT) broker.
 
 It is a [Ruby](https://en.wikipedia.org/wiki/Ruby_(programming_language)) based commandline-tool that is easy to install and works effortless on macOS and Linux (Raspberry Pi OS).
 
@@ -55,10 +55,10 @@ Publishing the your readings to an MQTT broker works by using the `-m` option wi
 ### Logging to file or console
 TODO
 
-## Installation as service (Linux)
+## Installation as service (Raspberry Pi OS)
 Having to start `tilt_hydrometer` from the commandline is not very convienient and does not restart the software upon crashes or system reboot. So it is recommended to setup `tilt_hydrometer` as a [systemd service](https://www.raspberrypi.org/documentation/linux/usage/systemd.md).
 
-Create a systemd service file in `/etc/systemd/system/tilt_hydrometer.service`:
+Create a systemd service file in `/etc/systemd/system/tilt_hydrometer.service` with the following contents:
 ```
 [Unit]
 Description=Tilt Hydrometer
@@ -76,7 +76,7 @@ User=root
 WantedBy=multi-user.target
 ```
 
-Adjust the paramaters in the `ExecStart` command to you needs.
+Adjust the paramaters in the `ExecStart` command to your needs.
 
 Then start the service:
 ```
@@ -88,10 +88,22 @@ And enable it to be reastarted upon failure or reboot:
 sudo systemctl enable tilt_hydrometer.service
 ```
 
+## What `tilt_hydromter` does
+
+* Read the bluetooth beacons of your Tilt
+* Post the data to Brewfather
+* Publish the data to an MQTT broker
+
+## What `tilt_hydromter` does not
+
+* Have a nice Web-GUI to manage your hydrometers (use the great GUI provided by Brewfather)
+* Calibrate data (can be done in Brewfather)
+* Ready to use Raspberry Pi image
+
 ## Why not using TiltPi?
 The TiltPi Raspberry Pi images are a great for getting started quick with your Tilt Hydrometer, but they require a dedicated Raspberry Pi just to read and post the values to a cloud service.
 
-Setting up TiltPi without using the image is a quite clunky process.
+You can setup TiltPi on any Linux computer, without relying on they image, but it is a quite clunky process. It requires a lot of steps, including monkey-patching 3rd party libraries.
 
 If you are using Brewfather like I do, all you need is forwarting the bluetooth readings to the Brewfather Webhook.
 
