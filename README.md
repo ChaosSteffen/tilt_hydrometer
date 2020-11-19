@@ -88,13 +88,13 @@ And enable it to be reastarted upon failure or reboot:
 sudo systemctl enable tilt_hydrometer
 ```
 
-## What `tilt_hydromter` does
+## What `tilt_hydrometer` does
 
 * Read the bluetooth beacons of your Tilt
 * Post the data to Brewfather
 * Publish the data to an MQTT broker
 
-## What `tilt_hydromter` does not
+## What `tilt_hydrometer` does not
 
 * Have a nice Web-GUI to manage your hydrometers (use the great GUI provided by Brewfather)
 * Calibrate data (can be done in Brewfather)
@@ -105,6 +105,6 @@ The TiltPi Raspberry Pi images are a great for getting started quick with your T
 
 You can setup TiltPi on any Linux computer, without relying on they image, but it is a quite clunky process. It requires a lot of steps, including monkey-patching 3rd party libraries.
 
-If you are using Brewfather like I do, all you need is forwarting the bluetooth readings to the Brewfather Webhook.
+If you are using Brewfather like I do, all you need is forwarding the bluetooth readings to the Brewfather Webhook.
 
-Being able to publish the data to a MQTT broken helps to integrate the Tilt with further automation like heting or cooling.
+Being able to publish the data to a MQTT broken helps to integrate the Tilt with further automation like heating or cooling.
