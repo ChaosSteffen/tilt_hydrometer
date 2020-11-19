@@ -38,14 +38,14 @@ sudo tilt_hydrometer -b http://log.brewfather.net/stream?id=abcdefghijkl123
 ## Usage
 The `tilt_hydrometer` command supports different operations, that also can be used in combination:
 
-### Posting pata to Brewfather
+### Posting data to Brewfather
 As mentioned before, posting data to Brewfather, works by just using the `-b` option with as [Custom Stream URL](https://docs.brewfather.app/integrations/custom-stream). There is an optional `-i` argument, that can be used to set the reporting interval in seconds, default is `900` (15 minutes).
 
 ```
 [sudo] tilt_hydrometer -b http://log.brewfather.net/stream?id=abcdefghijkl123 -i 900
 ```
 
-### Publishing data to MQTT broker
+### Publishing data to a MQTT broker
 Publishing the your readings to an MQTT broker works by using the `-m` option with a [MQTT URI](https://github.com/mqtt/mqtt.github.io/wiki/URI-Scheme). Using `-p` to set a MQTT-topic prefix is recommended.
 
 ```
@@ -80,12 +80,12 @@ Adjust the paramaters in the `ExecStart` command to your needs.
 
 Then start the service:
 ```
-sudo systemctl start tilt_hydrometer.service
+sudo systemctl start tilt_hydrometer
 ```
 
 And enable it to be reastarted upon failure or reboot:
 ```
-sudo systemctl enable tilt_hydrometer.service
+sudo systemctl enable tilt_hydrometer
 ```
 
 ## What `tilt_hydromter` does
