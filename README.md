@@ -77,13 +77,13 @@ Create a systemd service file in `/etc/systemd/system/tilt_hydrometer_ble_scanne
 ```doc/tilt_hydrometer_ble_scanner.service
 ```
 
-## What `tilt_hydromter` does
+## What `tilt_hydrometer` does
 
 * Read the bluetooth beacons of your Tilt
 * Post the data to Brewfather
 * Publish the data to an MQTT broker
 
-## What `tilt_hydromter` does not
+## What `tilt_hydrometer` does not
 
 * Have a nice Web-GUI to manage your hydrometers (use the great GUI provided by Brewfather)
 * Calibrate data (can be done in Brewfather)
