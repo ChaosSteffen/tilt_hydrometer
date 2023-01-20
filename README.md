@@ -23,6 +23,14 @@ As interacting with the bluetooth device on Raspberry Pi OS requires root-privil
 sudo tilt_hydrometer -b http://log.brewfather.net/stream?id=abcdefghijkl123
 ```
 
+In order to receive any BLE beacons you need to start `hcitool` in parallel.
+
+```
+hcitool lescan --passive --duplicates
+```
+
+*Only if you have both command running at the same time you will receive reading from your Tilt Hydrometer.*
+
 ## Usage
 The `tilt_hydrometer` command supports different operations, that also can be used in combination:
 
@@ -47,21 +55,8 @@ TODO
 Having to start `tilt_hydrometer` from the commandline is not very convienient and does not restart the software upon crashes or system reboot. So it is recommended to setup `tilt_hydrometer` as a [systemd service](https://www.raspberrypi.org/documentation/linux/usage/systemd.md).
 
 Create a systemd service file in `/etc/systemd/system/tilt_hydrometer.service` with the following contents:
-```
-[Unit]
-Description=Tilt Hydrometer
-After=network.target
+```doc/tilt_hydrometer.service
 
-[Service]
-ExecStart=/usr/local/bin/tilt_hydrometer  -b http://log.brewfather.net/stream?id=abcdefghijkl123 -i 900 -m mqtt://192.0.2.1:1883 -p foo/bar/
-WorkingDirectory=/home/pi
-StandardOutput=inherit
-StandardError=inherit
-Restart=always
-User=root
-
-[Install]
-WantedBy=multi-user.target
 ```
 
 Adjust the paramaters in the `ExecStart` command to your needs.
@@ -74,6 +69,12 @@ sudo systemctl start tilt_hydrometer
 And enable it to be reastarted upon failure or reboot:
 ```
 sudo systemctl enable tilt_hydrometer
+```
+
+`tilt_hydrometer` relies `hcitool` to be running and scanning for BLE beacons. So you need to start this also as service.
+
+Create a systemd service file in `/etc/systemd/system/tilt_hydrometer_ble_scanner.service` with the following contents:
+```doc/tilt_hydrometer_ble_scanner.service
 ```
 
 ## What `tilt_hydromter` does
