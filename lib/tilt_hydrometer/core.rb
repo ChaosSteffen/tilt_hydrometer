@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'open3'
+
 module TiltHydrometer
   class Core
     def initialize(options = {})
@@ -7,32 +9,36 @@ module TiltHydrometer
     end
 
     def run
-      scanner.scan do |beacons|
-        beacons.each do |beacon|
-          beacon.extend(TiltHydrometer::BeaconDecorator)
-          beacon.log
+      Open3.popen3 'hcidump -R' do |_stdin, stdout, _stderr, _thread|
+        buffer = []
+        while line = stdout.gets
+          if line.start_with?('>') || line.start_with?('<')
+            process_advertisement(buffer.join.gsub(/\s+/, ''))
 
-          if beacon.values_out_of_range?
-            LOGGER.debug('values out of range') && next
+            buffer = []
           end
 
-          brewfather&.post(beacon)
-          mqtt&.publish(beacon)
+          buffer << line[2..-2]
         end
       end
     end
 
     private
 
-    def scanner
-      @scanner ||=
-        ScanBeacon::DefaultScanner.new.tap do |s|
-          s.add_parser(
-            ScanBeacon::BeaconParser.new(
-              :tilt, 'm:0-5=4c000215a495,i:4-19,d:20-21,d:22-23,p:24-25'
-            )
-          )
+    def process_advertisement(data)
+      if match = data.match(/\h{40}(A495BB[1-8]0C5B14B44B5121370F02D74DE)(\h{4})(\h{4})(\h{2})(\h{2})/i)
+        uuid, temp, gravity, _power, _rssi = match.captures
+
+        beacon = Beacon.new(uuid, temp.to_i(16), gravity.to_i(16))
+        beacon.log
+
+        if beacon.values_out_of_range?
+          LOGGER.debug('values out of range')
+        else
+          brewfather&.post(beacon)
+          mqtt&.publish(beacon)
         end
+      end
     end
 
     def brewfather
