@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tilt_hydrometer (0.2.0.pre19)
+    tilt_hydrometer (0.2.0)
       bundler
       faraday (= 2.2.0)
       mqtt (= 0.5.0)
