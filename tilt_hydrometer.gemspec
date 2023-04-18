@@ -17,5 +17,5 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'bundler'
   s.add_runtime_dependency 'faraday', '2.2.0'
   s.add_runtime_dependency 'mqtt', '0.5.0'
-  s.required_ruby_version = Gem::Requirement.new('>= 2.7.8')
+  s.required_ruby_version = Gem::Requirement.new('>= 2.7.4') # Raspberry Pi OS 11 (Bullseye) supports Ruby 2.7.4 by default
 end
