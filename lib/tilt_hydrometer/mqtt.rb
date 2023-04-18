@@ -9,7 +9,11 @@ module TiltHydrometer
 
     def publish(beacon)
       ::MQTT::Client.connect(@mqtt_uri) do |c|
-        c.publish(topic(beacon), beacon_json(beacon), true)
+        c.publish(topic(beacon), beacon_json(beacon))
+        c.publish(topic(beacon) + '/temp_f', beacon.temp)
+        c.publish(topic(beacon) + '/temp_c', beacon.celsius)
+        c.publish(topic(beacon) + '/gravity_sg', beacon.gravity)
+        c.publish(topic(beacon) + '/gravity_p', beacon.plato)
       end
     end
 
