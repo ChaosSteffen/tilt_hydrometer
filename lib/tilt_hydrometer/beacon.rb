@@ -2,14 +2,12 @@
 
 module TiltHydrometer
   class Beacon
+    attr_reader :uuid
+
     def initialize(uuid, temp, gravity)
       @uuid = uuid
       @temp = temp
       @gravity = gravity
-    end
-
-    def uuid
-      @uuid
     end
 
     def color
@@ -18,7 +16,7 @@ module TiltHydrometer
 
     def temp
       if pro?
-        @temp.to_i/10.0
+        @temp.to_i / 10.0
       else
         @temp.to_i
       end
@@ -28,9 +26,9 @@ module TiltHydrometer
       gravity_string = @gravity.to_s
 
       if pro?
-        "#{gravity_string[-5] || 0}.#{gravity_string[-4..-1]}".to_f
+        "#{gravity_string[-5] || 0}.#{gravity_string[-4..]}".to_f
       else
-        "#{gravity_string[-4] || 0}.#{gravity_string[-3..-1]}".to_f
+        "#{gravity_string[-4] || 0}.#{gravity_string[-3..]}".to_f
       end
     end
 

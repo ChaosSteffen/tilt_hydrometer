@@ -16,8 +16,6 @@ module TiltHydrometer
     def execution_allowed?(uuid)
       return true if timers[uuid].nil?
 
-      # puts @interval.inspect
-
       timers[uuid] + @interval < Time.now.utc
     end
 
