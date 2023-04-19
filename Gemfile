@@ -7,4 +7,6 @@ gemspec
 gem 'code-scanning-rubocop'
 gem 'rspec'
 gem 'rubocop'
+gem 'rubocop-performance'
+gem 'rubocop-rspec'
 gem 'simplecov'
