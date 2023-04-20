@@ -76,6 +76,7 @@ GEM
       json
       simplecov
     simplecov_json_formatter (0.1.4)
+    timecop (0.9.6)
     unicode-display_width (2.4.2)
     webmock (3.18.1)
       addressable (>= 2.8.0)
@@ -94,6 +95,7 @@ DEPENDENCIES
   simplecov
   simplecov-json
   tilt_hydrometer!
+  timecop
   webmock
 
 BUNDLED WITH

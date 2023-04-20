@@ -12,5 +12,6 @@ group :test do
   gem 'rubocop-rspec'
   gem 'simplecov'
   gem 'simplecov-json'
+  gem 'timecop'
   gem 'webmock'
 end
