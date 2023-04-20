@@ -117,4 +117,9 @@ describe TiltHydrometer::Beacon do
       end
     end
   end
+
+  # add failing spec
+  it 'fails' do
+    expect(true).to be false
+  end
 end
