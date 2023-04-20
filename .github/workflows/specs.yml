@@ -20,6 +20,4 @@ jobs:
       run: bundle install
 
     - name: Run specs
-      run: |
-        bin/rails db:create db:schema:load
-        bundle exec rspec
+      run: bundle exec rspec
