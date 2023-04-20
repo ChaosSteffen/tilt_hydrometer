@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-require 'bundler'
-
-Bundler.require(:default)
-
 require 'simplecov'
 require 'simplecov-json'
 SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new(
@@ -16,9 +12,11 @@ SimpleCov.start do
   track_files 'lib/**/*.rb'
 end
 
-require 'webmock/rspec'
+require 'bundler'
 
-require 'tilt_hydrometer'
+Bundler.require(:default)
+
+require 'webmock/rspec'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |c|
