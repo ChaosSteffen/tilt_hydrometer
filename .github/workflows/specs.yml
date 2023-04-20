@@ -29,5 +29,5 @@ jobs:
     - name: Add code coverage comment
       uses: romeovs/lcov-reporter-action@v0.2.16
       with:
-        lcov-file: ./coverage/lcov/ruby-simplecov.lcov
+        lcov-file: ./coverage/lcov/tilt_hydrometer.lcov
         github-token: ${{ secrets.GITHUB_TOKEN }}
