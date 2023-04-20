@@ -44,6 +44,10 @@ describe TiltHydrometer::Brewfather do
         )
       end
 
+      before do
+        allow(TiltHydrometer::LOGGER).to receive(:debug)
+      end
+
       it 'does not post the beacon to Brewfather twice' do
         2.times { brewfather.post(beacon) }
 
