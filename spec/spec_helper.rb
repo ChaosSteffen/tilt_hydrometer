@@ -10,6 +10,7 @@ SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new(
 )
 SimpleCov.start do
   track_files 'lib/**/*.rb'
+  add_filter 'lib/tilt_hydrometer/version.rb'
 end
 
 require 'bundler'
