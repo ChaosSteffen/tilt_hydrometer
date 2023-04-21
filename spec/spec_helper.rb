@@ -19,6 +19,8 @@ Bundler.require(:default)
 
 require 'webmock/rspec'
 require 'timecop'
+require 'byebug'
+
 RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
