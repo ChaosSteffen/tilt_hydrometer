@@ -1,5 +1,21 @@
+require:
+  - rubocop-performance
+  - rubocop-rspec
+
 AllCops:
   NewCops: enable
+  TargetRubyVersion: 2.7
 
 Style/Documentation:
   Enabled: false
+
+Metrics/ModuleLength:
+  Exclude:
+    - "**/*_spec.rb"
+
+Metrics/BlockLength:
+  Exclude:
+    - "**/*_spec.rb"
+
+RSpec/MultipleExpectations:
+  Max: 3

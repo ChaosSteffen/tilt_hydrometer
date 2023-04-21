@@ -12,7 +12,7 @@ module TiltHydrometer
       Open3.popen3 'hcidump -R' do |_stdin, stdout, _stderr, _thread|
         buffer = []
         while (line = stdout.gets)
-          if line.start_with?('>') || line.start_with?('<')
+          if line.start_with?('>', '<')
             process_advertisement(buffer.join.gsub(/\s+/, ''))
 
             buffer = []

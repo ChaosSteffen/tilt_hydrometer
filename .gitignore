@@ -2,3 +2,5 @@
 NOTES
 TODO
 *.gem
+.byebug_history
+coverage/
