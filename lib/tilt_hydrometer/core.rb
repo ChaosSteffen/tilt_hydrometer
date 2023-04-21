@@ -9,6 +9,14 @@ module TiltHydrometer
     end
 
     def run
+      start_ble_scan unless defined?(RSpec)
+
+      listen_for_advetisements
+    end
+
+    private
+
+    def listen_for_advetisements
       Open3.popen3 'hcidump -R' do |_stdin, stdout, _stderr, _thread|
         buffer = []
         while (line = stdout.gets)
@@ -23,8 +31,6 @@ module TiltHydrometer
       end
     end
 
-    private
-
     def process_advertisement(data)
       return unless (match = data.match(/\h{40}(A495BB[1-8]0C5B14B44B5121370F02D74DE)(\h{4})(\h{4})(\h{2})(\h{2})/i))
 
@@ -38,6 +44,20 @@ module TiltHydrometer
       else
         brewfather&.post(beacon)
         mqtt&.publish(beacon)
+      end
+    end
+
+    def start_ble_scan
+      thread = Thread.new do
+        loop do
+          system('timeout 10 hcitool lescan --passive --duplicates')
+          system('hciconfig hci0 down && hciconfig hci0 up')
+        end
+      end
+
+      Signal.trap('TERM') do
+        Process.kill('TERM', thread.pid) if thread.alive?
+        exit
       end
     end
 
